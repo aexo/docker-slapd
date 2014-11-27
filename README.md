@@ -25,7 +25,7 @@ with data stored in `/data/ldap` on the host, use the following:
                -e LDAP_DOMAIN=mycorp.com \
                -e LDAP_ORGANISATION="My Mega Corporation" \
                -e LDAP_ROOTPASS=s3cr3tpassw0rd \
-               -d nickstenning/slapd
+               -d aexoti/slapd
 
 You can find out which port the LDAP server is bound to on the host by running
 `docker ps` (or `docker port <container_id> 389`). You could then load an LDIF

@@ -1,5 +1,5 @@
 FROM phusion/baseimage:0.9.8
-MAINTAINER Nick Stenning <nick@whiteink.com>
+MAINTAINER Carlos Alberto <aexo@aexo.com.br>
 
 ENV HOME /root
 
@@ -29,5 +29,3 @@ ADD slapd.sh /etc/service/slapd/run
 # To store the data outside the container, mount /var/lib/ldap as a data volume
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# vim:ts=8:noet:
