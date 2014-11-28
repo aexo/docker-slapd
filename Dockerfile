@@ -1,4 +1,4 @@
-FROM phusion/baseimage:0.9.8
+FROM phusion/baseimage:0.9.15
 MAINTAINER Carlos Alberto <aexo@aexo.com.br>
 
 ENV HOME /root
