@@ -4,7 +4,7 @@ MAINTAINER Carlos Alberto <aexo@aexo.com.br>
 ENV HOME /root
 
 # Disable SSH
-#RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
+RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
@@ -20,7 +20,7 @@ RUN LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y slapd
 ENV LDAP_ROOTPASS toor
 ENV LDAP_ORGANISATION Acme Widgets Inc.
 ENV LDAP_DOMAIN example.com
-RUN echo "root:teste" | chpasswd
+
 EXPOSE 389
 
 RUN mkdir /etc/service/slapd
