@@ -21,7 +21,7 @@ to `docker run`:
 For example, to start a container running slapd for the `mycorp.com` domain,
 with data stored in `/data/ldap` on the host, use the following:
 
-    docker run -v /data/ldap:/var/lib/ldap \
+    docker run -v /data/ldap:/data/ldap \
                -e LDAP_DOMAIN=mycorp.com \
                -e LDAP_ORGANISATION="My Mega Corporation" \
                -e LDAP_ROOTPASS=s3cr3tpassw0rd \
