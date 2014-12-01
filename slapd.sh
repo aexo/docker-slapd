@@ -11,8 +11,19 @@ set -x
 : LDAP_DOMAIN=${LDAP_DOMAIN}
 : LDAP_ORGANISATION=${LDAP_ORGANISATION}
 
-if [ ! -e /var/lib/ldap/docker_bootstrapped ]; then
+
+ln -s /data/ldap/slapd.d /etc/ldap/slapd.d
+ln -s /data/ldap/schema /etc/ldap/schema
+ln -s /data/ldap/config /var/lib/ldap
+
+chown openldap:openldap /data/ldap -R
+
+if [ ! -e /data/ldap/docker_bootstrapped ]; then
   status "configuring slapd for first run"
+
+  cp /backup/ldap/slapd.d /data/ldap -r
+  cp /backup/ldap/schema /data/ldap -r
+  cp /backup/ldap/config /data/ldap/config -r
 
   cat <<EOF | debconf-set-selections
 slapd slapd/internal/generated_adminpw password ${LDAP_ROOTPASS}
@@ -32,7 +43,7 @@ EOF
 
   dpkg-reconfigure -f noninteractive slapd
 
-  touch /var/lib/ldap/docker_bootstrapped
+  touch /data/ldap/docker_bootstrapped
 else
   status "found already-configured slapd"
 fi

@@ -1,7 +1,7 @@
 ## slapd
 
 A basic configuration of the OpenLDAP server, slapd, with support for data
-volumes.
+volumes in ephemeral container.
 
 This image will initialize a basic configuration of slapd. Most common schemas
 are preloaded (all the schemas that come preloaded with the default Ubuntu

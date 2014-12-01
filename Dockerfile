@@ -4,7 +4,7 @@ MAINTAINER Carlos Alberto <aexo@aexo.com.br>
 ENV HOME /root
 
 # Disable SSH
-RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
+#RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
@@ -20,11 +20,19 @@ RUN LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y slapd
 ENV LDAP_ROOTPASS toor
 ENV LDAP_ORGANISATION Acme Widgets Inc.
 ENV LDAP_DOMAIN example.com
-
+RUN echo "root:teste" | chpasswd
 EXPOSE 389
 
 RUN mkdir /etc/service/slapd
 ADD slapd.sh /etc/service/slapd/run
+
+RUN mkdir -p /backup/ldap/config
+RUN mkdir -p /data/ldap
+
+RUN mv /etc/ldap/slapd.d /backup/ldap/ 
+RUN mv /etc/ldap/schema /backup/ldap/
+RUN mv /var/lib/ldap/* /backup/ldap/config
+RUN rm -rf /var/lib/ldap
 
 # To store the data outside the container, mount /var/lib/ldap as a data volume
 
